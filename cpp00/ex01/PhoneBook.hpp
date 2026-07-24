@@ -9,15 +9,15 @@
 
 class PhoneBook{
     private:
-        Contact contacts[8];
-        int maxId = 8;
-        int nextId;
-
+	    Contact contacts[8];
+	    int num_contacts;
+	    int next_index;
     public:
-        PhoneBook();
-        ~PhoneBook();
-
-        void add_contact();
+	    PhoneBook();
+	    ~PhoneBook();
+        
+        void    addContact();
+        void    searchContact() const;
 };
 
 #endif
