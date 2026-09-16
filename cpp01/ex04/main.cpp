@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	std::string out;
 	size_t pos = 0;
 	size_t found;
+	// Keep pos at the first input character that has not been copied yet.
 	while ((found = content.find(s1, pos)) != std::string::npos) {
 		out.append(content, pos, found - pos);
 		out += s2;

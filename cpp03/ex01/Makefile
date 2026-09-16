@@ -1,19 +1,20 @@
 NAME=scavtrap
-CXX=g++
+CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -Iinclude
-SRCS=src/main.cpp src/ClapTrap.cpp src/ScavTrap.cpp
-
-.PHONY: all clean fclean re
+SRCS=main.cpp src/ClapTrap.cpp src/ScavTrap.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME):
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -f *.o
-
+	rm -f $(OBJS)
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

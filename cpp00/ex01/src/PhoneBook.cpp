@@ -1,4 +1,4 @@
-#include "PhoneBook.hpp"
+#include "../include/PhoneBook.hpp"
 
 static void printFormatedField(const std::string& field)
 {
@@ -38,6 +38,7 @@ void PhoneBook::searchContact() const
 	
 	while (true)
 	{
+		// A non-numeric entry is the documented way to cancel the search.
 		std::cout << "Introduce the ID of the contact you want to see (Press any letter to cancel):";
 		if (!std::getline(std::cin, line_input))
 		{
@@ -115,6 +116,7 @@ void PhoneBook::addContact()
 	this->contacts[next_index] = tmp_contact;
 	if (num_contacts < 8)
 		num_contacts++;
+	// Once full, the next contact replaces the oldest slot in a circular buffer.
 	next_index = (next_index + 1) % 8;
 
 	std::cout << "Contact added correctly." << std::endl;

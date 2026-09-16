@@ -1,4 +1,4 @@
-#include "HumanB.hpp"
+#include "../include/HumanB.hpp"
 #include <iostream>
 
 HumanB::HumanB(std::string name) : name(name), weapon(NULL) {}

@@ -17,6 +17,7 @@ Fixed::Fixed(float const f)
 	float	scaled;
 
 	std::cout << "Float constructor called" << std::endl;
+	// Store the value with eight fractional bits, rounding to the nearest raw value.
 	scaled = f * (1 << _fractBits);
 	if (f >= 0)
 		this->_fixedPointNumber = static_cast<int>(scaled + 0.5f);
@@ -55,6 +56,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
+	// Divide by 2^fractional_bits to restore the floating-point value.
 	return (static_cast<float>(this->_fixedPointNumber) / (1 << _fractBits));
 }
 
@@ -91,6 +93,7 @@ bool Fixed::operator!=(Fixed const &other) const
 Fixed Fixed::operator+(Fixed const &other) const
 {
 	Fixed r;
+	// Addition and subtraction preserve the fixed-point scale in raw form.
 	r.setRawBits(this->_fixedPointNumber + other._fixedPointNumber);
 	return (r);
 }
@@ -104,7 +107,7 @@ Fixed Fixed::operator-(Fixed const &other) const
 
 Fixed Fixed::operator*(Fixed const &other) const
 {
-	// Multiply as floats to avoid overflow and fractional handling
+	// multiply as float to avoid overflow
 	return (Fixed(this->toFloat() * other.toFloat()));
 }
 

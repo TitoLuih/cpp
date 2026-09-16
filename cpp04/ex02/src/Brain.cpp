@@ -32,6 +32,7 @@ Brain::~Brain()
 
 void Brain::setIdea(int index, const std::string &idea)
 {
+	// Ignore indexes outside the fixed 100-element idea storage.
 	if (index >= 0 && index < 100)
 		ideas[index] = idea;
 }

@@ -1,19 +1,23 @@
 NAME=fixed
-CXX=g++
+CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -Iinclude
-SRCS=src/main.cpp src/Fixed.cpp
-
-.PHONY: all clean fclean re
+SRCS=main.cpp src/Fixed.cpp
+OBJS=$(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME):
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

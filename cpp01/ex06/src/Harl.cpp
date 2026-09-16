@@ -1,4 +1,4 @@
-#include "Harl.hpp"
+#include "../include/Harl.hpp"
 #include <iostream>
 
 Harl::Harl() {}
@@ -26,6 +26,7 @@ void Harl::error(void) {
 void Harl::complain(std::string level) {
     typedef void (Harl::*HarlMemFn)(void);
     std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	// Pair each level with its member function to avoid a long if/else chain.
     HarlMemFn funcs[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
     for (int i = 0; i < 4; ++i) {
@@ -37,18 +38,16 @@ void Harl::complain(std::string level) {
 }
 
 void Harl::complainFrom(int level) {
-    switch (level) {
-        case 0:
-            debug();
-        case 1:
-            info();
-        case 2:
-            warning();
-        case 3:
-            error();
-            break;
-        default:
-            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-			break;
+    if (level < 0 || level > 3) {
+        std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+        return;
     }
+	// A higher severity includes all messages at and above the requested level.
+    if (level <= 0)
+        debug();
+    if (level <= 1)
+        info();
+    if (level <= 2)
+        warning();
+    error();
 }

@@ -13,6 +13,7 @@ public:
 	Animal();
 	Animal(const Animal &other);
 	Animal &operator=(const Animal &other);
+	// Virtual dispatch and destruction make Animal safe as a base-class pointer.
 	virtual ~Animal();
 
 	virtual void makeSound() const;
